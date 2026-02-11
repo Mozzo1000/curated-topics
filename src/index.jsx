@@ -13,14 +13,30 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState('desc');
   const [searchQuery, setSearchQuery] = useState('');
-  const [isDark, setIsDark] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [isGrid, setIsGrid] = useState(false); // New Layout State
   const [copyId, setCopyId] = useState(null); // For "Copied!" feedback
   const [selectedDomain, setSelectedDomain] = useState('all'); // New Domain State
   const searchInputRef = useRef(null);
-  const PAGE_SIZE = isGrid ? 6 : 5; // Grid looks better with multiples of 3
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem('vault-theme') === 'dark';
+  });
+  
+  const [isGrid, setIsGrid] = useState(() => {
+    return localStorage.getItem('vault-layout') === 'grid';
+  });
+
+  const PAGE_SIZE = isGrid ? 6 : 5; // Grid looks better with multiples of 3
+
+
+  useEffect(() => {
+    localStorage.setItem('vault-theme', isDark ? 'dark' : 'light');
+  }, [isDark]);
+
+  useEffect(() => {
+    localStorage.setItem('vault-layout', isGrid ? 'grid' : 'list');
+  }, [isGrid]);
 
   // --- EFFECTS ---
   useEffect(() => {
@@ -120,10 +136,10 @@ const allLinks = currentCollection?.links || [];
       <div style={styles.container}>
         
         <header style={styles.header}>
-          <h1 style={{margin: 0}}>Link Vault</h1>
+          <h1>Links</h1>
           
-          <button onClick={() => setIsDrawerOpen(true)} style={styles.iconBtn}>
-            ⚙️ Settings
+          <button onClick={() => setIsDrawerOpen(true)} style={{...styles.iconBtn, backgroundColor: theme.tabBg, color: theme.text}}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path></svg>
           </button>
         </header>
 
@@ -248,7 +264,7 @@ const darkTheme = { bg: '#0d0d0d', text: '#eee', cardBg: '#1a1a1a', border: '#33
 
 const styles = {
   wrapper: { transition: 'background-color 0.3s ease' },
-
+  iconBtn: {width: "3.6em", padding: '8px 12px', border: 'none', borderRadius: '8px', cursor: 'pointer' },
   // Slightly narrower max width + more padding for mobile comfort
   container: { maxWidth: '1200px', margin: '0 auto', padding: '24px' },
 
