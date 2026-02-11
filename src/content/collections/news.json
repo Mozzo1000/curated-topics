@@ -1,0 +1,11 @@
+{
+  "title": "news",
+  "links": [
+    {
+      "url": "https://google.com",
+      "title": "google",
+      "description": "description",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJcb_5OH1mWWtvcvDhymf5vM-6kAU3aC_Weg&s"
+    }
+  ]
+}

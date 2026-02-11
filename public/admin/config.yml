@@ -1,0 +1,27 @@
+local_backend: true
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "collections"
+    label: "Link Collections"
+    folder: "src/content/collections"
+    create: true
+    format: "json"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Collection Title", name: "title", widget: "string" }
+      - label: "Links"
+        name: "links" 
+        widget: "list"
+        summary: "{{fields.title}}"
+        fields:
+          - { label: "URL", name: "url", widget: "string" }
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Thumbnail", name: "image", widget: "image" }
+          - { label: "Date Added", name: "date", widget: "datetime", format: "YYYY-MM-DD", default: ["now"] }
