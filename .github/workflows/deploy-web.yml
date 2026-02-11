@@ -1,11 +1,15 @@
 name: Deploy Preact Site
 
 on:
-  workflow_dispatch:
+  push: 
+    branches: 
+      - main # Only run when commit message contains this text # (GitHub Actions does not support commit-message filters here, # so we filter inside the job using `if:`) workflow_dispatch:
+  
 jobs:
   build:
     name: Build Preact Site
     runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, 'Update Link Collections')
     defaults:
       run:
         working-directory: .
@@ -33,7 +37,7 @@ jobs:
   deploy:
     name: Deploy to GitHub Pages
     needs: build
-
+    if: needs.build.result == 'success'
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
       pages: write # to deploy to Pages
