@@ -360,7 +360,7 @@ const styles = {
     marginBottom: '18px' 
   },
 
-  selectWrapper: { position: 'relative', display: 'flex', alignItems: 'center'},
+  selectWrapper: { position: 'relative', display: 'flex', alignItems: 'center', gap: "10px"},
   select: { 
     appearance: 'none', 
     padding: '10px 34px 10px 14px', 
