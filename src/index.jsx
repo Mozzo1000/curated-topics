@@ -19,16 +19,14 @@ export default function App() {
   const searchInputRef = useRef(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const [isDark, setIsDark] = useState(() => {
-    return localStorage.getItem('vault-theme') === 'dark';
-  });
+  const [isDark, setIsDark] = useState();
   
-  const [isGrid, setIsGrid] = useState(() => {
-    return localStorage.getItem('vault-layout') === 'grid';
-  });
+  const [isGrid, setIsGrid] = useState();
 
   const PAGE_SIZE = isGrid ? 6 : 5; // Grid looks better with multiples of 3
 
+  useEffect(() => { setIsDark(localStorage.getItem("vault-theme") === "dark"); }, []);
+  useEffect(() => { setIsGrid(localStorage.getItem("vault-layout") === "grid"); }, []);
 
   useEffect(() => {
     localStorage.setItem('vault-theme', isDark ? 'dark' : 'light');
