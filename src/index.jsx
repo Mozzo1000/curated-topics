@@ -238,6 +238,22 @@ const allLinks = currentCollection?.links || [];
           </div>
         )}
       </div>
+
+        <footer style={{
+          ...styles.footer, 
+          borderTop: `1px solid ${theme.border}`,
+          color: theme.muted 
+        }}>
+          <p>
+            Created by <a href="https://andreasbackstrom.se" 
+                          target="_blank" 
+                          rel="noopener" 
+                          style={{ color: theme.text, fontWeight: 'bold', textDecoration: 'none' }}>
+              Andreas Backström
+            </a>
+          </p>
+        </footer>
+
       <Drawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} isDark={isDark}>
         <ToggleRow 
           label="Dark Mode" 
@@ -263,10 +279,7 @@ const lightTheme = { bg: '#fff', text: '#1a1a1a', cardBg: '#fff', border: '#eee'
 const darkTheme = { bg: '#0d0d0d', text: '#eee', cardBg: '#1a1a1a', border: '#333', tabBg: '#333', activeTab: '#444', muted: '#aaa' };
 
 const styles = {
-  wrapper: { transition: 'background-color 0.3s ease' },
   iconBtn: {width: "3.6em", padding: '8px 12px', border: 'none', borderRadius: '8px', cursor: 'pointer' },
-  // Slightly narrower max width + more padding for mobile comfort
-  container: { maxWidth: '1200px', margin: '0 auto', padding: '24px' },
 
   header: { 
     display: 'flex', 
@@ -347,7 +360,7 @@ const styles = {
     marginBottom: '18px' 
   },
 
-  selectWrapper: { position: 'relative', display: 'flex', alignItems: 'center' },
+  selectWrapper: { position: 'relative', display: 'flex', alignItems: 'center'},
   select: { 
     appearance: 'none', 
     padding: '10px 34px 10px 14px', 
@@ -420,6 +433,27 @@ const styles = {
   listLayout: { display: 'flex', flexDirection: 'column', gap: '16px' },
   gridLayout: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' },
   shareBtn: { background: 'none', border: 'none', fontSize: '0.8rem', cursor: 'pointer', fontWeight: 'bold', padding: '4px 8px' },
+  wrapper: { 
+    display: 'flex', 
+    flexDirection: 'column', 
+    minHeight: '100vh', 
+    transition: 'background-color 0.3s ease' 
+  },
+  // This is your main content container
+  container: { 
+    maxWidth: '1200px', 
+    margin: '0 auto', 
+    padding: '40px 20px',
+    flex: 1, // This tells the container to grow and fill all available space
+    width: '100%',
+    boxSizing: 'border-box'
+  },
+  footer: {
+    paddingBottom: "15px",
+    textAlign: 'center',
+    fontSize: '0.9rem',
+    width: '100%',
+  }
 };
 
 
