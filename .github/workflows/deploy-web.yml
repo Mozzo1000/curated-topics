@@ -3,13 +3,15 @@ name: Deploy Preact Site
 on:
   push: 
     branches: 
-      - main # Only run when commit message contains this text # (GitHub Actions does not support commit-message filters here, # so we filter inside the job using `if:`) workflow_dispatch:
+      - main # Only run when commit message contains this text # (GitHub Actions does not support commit-message filters here, # so we filter inside the job using `if:`) 
+  workflow_dispatch:
   
 jobs:
   build:
     name: Build Preact Site
     runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.message, 'Update Link Collections')
+    if: | 
+      github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, 'Link Collections')
     defaults:
       run:
         working-directory: .
