@@ -1,6 +1,7 @@
-local_backend: true
+#local_backend: true
 backend:
-  name: git-gateway
+  name: github
+  repo: mozzo1000/curated-topics # Path to your GitHub repository
   branch: main
 
 media_folder: "public/images"
