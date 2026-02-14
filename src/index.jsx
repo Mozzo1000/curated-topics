@@ -98,8 +98,14 @@ export default function App() {
 
   // --- LOGIC ---
   const currentCollection = collections[activeIndex];
-  const allLinks = currentCollection?.links || [];
-
+  const allLinks = useMemo(() => {
+    if (activeIndex === -1) {
+      // Flatten all links from all collections into one array
+      return collections.flatMap(col => col.links || []);
+    }
+    return collections[activeIndex]?.links || [];
+  }, [collections, activeIndex]);
+  
   // 1. Extract Unique Domains for the dropdown
   const uniqueDomains = useMemo(() => {
     const domains = allLinks.map(link => {
