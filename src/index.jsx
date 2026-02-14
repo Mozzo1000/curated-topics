@@ -27,14 +27,18 @@ export default function App() {
 
   const [appTheme, setAppTheme] = useState('system'); // 'light' | 'dark' | 'system'
   const [viewMode, setViewMode] = useState('grid'); // 'list' | 'grid'
-  const [previewEnabled, setPreviewEnabled] = useState(() => {
-    const saved = localStorage.getItem('link-preview');
-    return saved !== null ? JSON.parse(saved) : true; // Default to true
-  });
+  const [previewEnabled, setPreviewEnabled] = useState(true);
   const PAGE_SIZE = viewMode === "grid" ? 12 : 8; // Grid looks better with multiples of 3
 
   useEffect(() => { setAppTheme(localStorage.getItem("link-theme") || "system"); }, []);
   useEffect(() => { setViewMode(localStorage.getItem("link-layout") || "list"); }, []);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("link-preview");
+    if (saved !== null) {
+      setPreviewEnabled(saved === "true");
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('link-theme', appTheme);
