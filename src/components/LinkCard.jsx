@@ -1,10 +1,21 @@
-import React from 'react';
 import { Share2 } from 'lucide-preact';
 import { useToast } from '../ToastContext';
+import { useEffect, useRef } from 'preact/hooks';
 
-function LinkCard({ link, view }) {
+function LinkCard({ link, view, isFocused}) {
   const domain = new URL(link.url).hostname.replace('www.', '');
   const toast = useToast();
+  const cardRef = useRef(null);
+
+  // Auto-scroll logic
+  useEffect(() => {
+    if (isFocused && cardRef.current) {
+      cardRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
+    }
+  }, [isFocused]);
 
   const handleShare = (e) => {
     e.preventDefault(); // Prevent opening the link when clicking share
@@ -22,7 +33,8 @@ function LinkCard({ link, view }) {
   };
 
   return (
-    <div 
+    <div
+      ref={cardRef}
       className={`
         group relative transition-all duration-300
         bg-white border border-gray-100 shadow-sm
@@ -31,6 +43,10 @@ function LinkCard({ link, view }) {
         ${view === 'grid' 
           ? 'p-0 rounded-2xl flex flex-col h-full overflow-hidden' 
           : 'p-4 rounded-xl flex items-center gap-4 mb-3'
+        }
+        ${isFocused 
+          ? 'border-black ring-2 ring-black dark:border-white dark:ring-white scale-[1.02] z-10 shadow-xl' 
+          : 'border-gray-200 dark:border-zinc-800'
         }
       `}>
       {/* 1. THE IMAGE SECTION */}

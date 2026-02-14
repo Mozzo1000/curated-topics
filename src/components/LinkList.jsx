@@ -8,7 +8,8 @@ function LinkList({
   currentPage, 
   setCurrentPage, 
   pageSize,
-  previewEnabled
+  previewEnabled,
+  focusedIndex
 }) {
   const totalPages = Math.ceil(links.length / pageSize);
   
@@ -27,8 +28,8 @@ function LinkList({
         }
       `}>
         {links.length > 0 ? (
-          paginatedLinks.map((link) => {
-              const cardElement = <LinkCard key={link.id || link.url} link={link} view={viewMode} />
+          paginatedLinks.map((link, idx) => {
+              const cardElement = <LinkCard key={link.id || link.url} link={link} view={viewMode} isFocused={focusedIndex === idx} />
               if (!previewEnabled) {
                   return cardElement;
                 }

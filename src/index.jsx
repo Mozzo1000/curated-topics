@@ -24,6 +24,7 @@ export default function App() {
   const [selectedDomain, setSelectedDomain] = useState('all'); // New Domain State
   const searchInputRef = useRef(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [focusedIndex, setFocusedIndex] = useState(-1);
 
   const [appTheme, setAppTheme] = useState('system'); // 'light' | 'dark' | 'system'
   const [viewMode, setViewMode] = useState('grid'); // 'list' | 'grid'
@@ -68,6 +69,11 @@ export default function App() {
     // Save to localStorage so it persists on refresh
     localStorage.setItem('link-theme', appTheme);
   }, [appTheme]);
+
+  // Reset focus when navigation/filtering happens
+  useEffect(() => {
+    setFocusedIndex(-1);
+  }, [activeIndex, searchQuery, selectedDomain, currentPage, sortOrder]);
 
   // --- EFFECTS ---
   useEffect(() => {
@@ -150,6 +156,29 @@ export default function App() {
     });
   }, [filteredLinks, sortOrder]);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Don't trigger if user is typing in the search bar
+      if (document.activeElement.tagName === 'INPUT') return;
+
+      const itemsOnPage = sortedLinks.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+      
+      if (e.key === 'k') {
+        setFocusedIndex(prev => Math.min(prev + 1, itemsOnPage.length - 1));
+      } else if (e.key === 'j') {
+        setFocusedIndex(prev => Math.max(prev - 1, 0));
+      } else if (e.key === 'Enter' && focusedIndex !== -1) {
+        window.open(itemsOnPage[focusedIndex].url, '_blank');
+      }
+      if (e.key === "Escape") {
+        setFocusedIndex(-1)
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [focusedIndex, sortedLinks, currentPage, PAGE_SIZE]);
+
 
   return (
     <ToastProvider>
@@ -198,6 +227,7 @@ export default function App() {
               setCurrentPage={setCurrentPage}
               pageSize={PAGE_SIZE}
               previewEnabled={previewEnabled}
+              focusedIndex={focusedIndex}
             />
             </>
           )}
