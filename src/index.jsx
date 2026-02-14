@@ -21,7 +21,7 @@ export default function App() {
   const [sortOrder, setSortOrder] = useState('desc');
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedDomain, setSelectedDomain] = useState('all'); // New Domain State
+  const [selectedDomains, setSelectedDomains] = useState([]);
   const searchInputRef = useRef(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(-1);
@@ -73,7 +73,18 @@ export default function App() {
   // Reset focus when navigation/filtering happens
   useEffect(() => {
     setFocusedIndex(-1);
-  }, [activeIndex, searchQuery, selectedDomain, currentPage, sortOrder]);
+  }, [activeIndex, searchQuery, selectedDomains, currentPage, sortOrder]);
+
+  const toggleDomain = (domain) => {
+    setSelectedDomains(prev => 
+      prev.includes(domain) 
+        ? prev.filter(d => d !== domain) // Remove if already there
+        : [...prev, domain]              // Add if not there
+    );
+  };
+
+  // Clear all filters
+  const clearDomains = () => setSelectedDomains([]);
 
   // --- EFFECTS ---
   useEffect(() => {
@@ -128,9 +139,13 @@ export default function App() {
   const filteredLinks = useMemo(() => {
     let items = allLinks;
 
-    // Filter by Domain
-    if (selectedDomain !== 'all') {
-      items = items.filter(link => link.url.includes(selectedDomain));
+    // Filter by Multiple Domains
+    // If the array is empty, we assume "all" are selected
+    if (selectedDomains.length > 0) {
+      items = items.filter(link => 
+        // Returns true if the URL contains AT LEAST ONE of the selected domains
+        selectedDomains.some(domain => link.url.includes(domain))
+      );
     }
 
     // Filter by Search Query
@@ -141,11 +156,12 @@ export default function App() {
         l.description?.toLowerCase().includes(q)
       );
     }
+
     return items;
-  }, [allLinks, selectedDomain, searchQuery]);
+  }, [allLinks, selectedDomains, searchQuery]);
 
   // Reset page when any filter changes
-  useEffect(() => setCurrentPage(1), [activeIndex, sortOrder, searchQuery, selectedDomain]);
+  useEffect(() => setCurrentPage(1), [activeIndex, sortOrder, searchQuery, selectedDomains]);
 
   // 3. Sorting & Pagination (standard logic using filteredLinks)
   const sortedLinks = useMemo(() => {
@@ -213,8 +229,8 @@ export default function App() {
             {/* Toolbar */}
             <FilterBar 
               resultCount={sortedLinks.length}
-              selectedDomain={selectedDomain}
-              setSelectedDomain={setSelectedDomain}
+              selectedDomains={selectedDomains}
+              setSelectedDomains={setSelectedDomains}
               uniqueDomains={uniqueDomains}
               sortOrder={sortOrder}
               setSortOrder={setSortOrder}
