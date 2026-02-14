@@ -9,6 +9,7 @@ import FilterBar from './components/FilterBar';
 import Footer from './components/Footer';
 import LinkList from './components/LinkList';
 import { Loader } from './components/Loader';
+import { ToastProvider } from './ToastContext';
 
 const collectionFiles = import.meta.glob('/src/content/collections/*.json');
 
@@ -134,65 +135,67 @@ export default function App() {
 
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-black dark:bg-zinc-950 dark:text-white transition-all duration-300 ease-in-out">
-        <div className="max-w-300 mx-auto px-5 py-10 flex-1 w-full box-border">
-        
-        <header className="flex justify-between items-center mb-7">
-          <div className="flex items-center gap-2.5">
-            <Bookmark className="h-6 w-6 text-foreground sm:h-7 sm:w-7" />
-            <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-              Links
-            </h1>
-          </div>
+    <ToastProvider>
+      <div className="min-h-screen flex flex-col bg-white text-black dark:bg-zinc-950 dark:text-white transition-all duration-300 ease-in-out">
+          <div className="max-w-300 mx-auto px-5 py-10 flex-1 w-full box-border">
           
-          <button onClick={() => setIsDrawerOpen(true)} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors">
-            <Settings className="text-gray-600 dark:text-zinc-400" size={22} />
-          </button>
-        </header>
+          <header className="flex justify-between items-center mb-7">
+            <div className="flex items-center gap-2.5">
+              <Bookmark className="h-6 w-6 text-foreground sm:h-7 sm:w-7" />
+              <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                Links
+              </h1>
+            </div>
+            
+            <button onClick={() => setIsDrawerOpen(true)} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors">
+              <Settings className="text-gray-600 dark:text-zinc-400" size={22} />
+            </button>
+          </header>
 
-        {isLoading ? (
-          <Loader />
-        ): (
-          <>
-          {/* Tabs */}
-          <TagList collections={collections} index={activeIndex} onClick={setActiveIndex} />
+          {isLoading ? (
+            <Loader />
+          ): (
+            <>
+            {/* Tabs */}
+            <TagList collections={collections} index={activeIndex} onClick={setActiveIndex} />
 
-          {/* Search */}
-          <div className="relative mb-5.5">
-            <SearchBar value={searchQuery} inputRef={searchInputRef} onChange={setSearchQuery} />
+            {/* Search */}
+            <div className="relative mb-5.5">
+              <SearchBar value={searchQuery} inputRef={searchInputRef} onChange={setSearchQuery} />
+            </div>
+
+            {/* Toolbar */}
+            <FilterBar 
+              resultCount={sortedLinks.length}
+              selectedDomain={selectedDomain}
+              setSelectedDomain={setSelectedDomain}
+              uniqueDomains={uniqueDomains}
+              sortOrder={sortOrder}
+              setSortOrder={setSortOrder}
+            />
+
+            <LinkList 
+              links={sortedLinks} // Pass the full filtered/sorted array
+              viewMode={viewMode}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              pageSize={PAGE_SIZE}
+            />
+            </>
+          )}
           </div>
 
-          {/* Toolbar */}
-          <FilterBar 
-            resultCount={sortedLinks.length}
-            selectedDomain={selectedDomain}
-            setSelectedDomain={setSelectedDomain}
-            uniqueDomains={uniqueDomains}
-            sortOrder={sortOrder}
-            setSortOrder={setSortOrder}
-          />
-
-          <LinkList 
-            links={sortedLinks} // Pass the full filtered/sorted array
-            viewMode={viewMode}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            pageSize={PAGE_SIZE}
-          />
-          </>
-        )}
-        </div>
-
-      <Footer />
-      <SettingsDrawer 
-        isOpen={isDrawerOpen} 
-        onClose={() => setIsDrawerOpen(false)}
-        theme={appTheme}
-        setTheme={setAppTheme}
-        viewMode={viewMode}
-        onViewModeChange={setViewMode}
-      />
-    </div>
+        <Footer />
+        <SettingsDrawer 
+          isOpen={isDrawerOpen} 
+          onClose={() => setIsDrawerOpen(false)}
+          theme={appTheme}
+          setTheme={setAppTheme}
+          viewMode={viewMode}
+          onViewModeChange={setViewMode}
+        />
+      </div>
+    </ToastProvider>
   );
 }
 
