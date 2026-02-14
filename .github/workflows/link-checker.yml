@@ -1,0 +1,30 @@
+name: Link Checker
+
+on:
+  schedule:
+    # Runs at 00:00 every Sunday
+    - cron: '0 0 * * 0'
+  workflow_dispatch: # Allows you to run it manually from the "Actions" tab
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Lychee Link Check
+        uses: lycheeverse/lychee-action@v1.9.0
+        with:
+          # Point this to your content folder
+          args: --verbose --no-progress './src/content/**/*.json'
+          # Fail the action if broken links are found (optional)
+          fail: false 
+
+      - name: Create Issue From Broken Links
+        if: env.lychee_exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "🔗 Broken Links Detected"
+          content-filepath: ./lychee/out.md
+          labels: bug, automated-report
