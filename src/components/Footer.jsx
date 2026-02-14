@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'preact/hooks';
 import { Keyboard, Github } from 'lucide-preact';
 import { ShortcutModal } from './ShortcutModal';
+import { UpdatedBadge } from './UpdatedBadge';
 
 function Footer() {
   const [isShortcutModalOpen, setIsShortcutModalOpen] = useState(false);
@@ -44,6 +45,7 @@ function Footer() {
               <Github size={14} className="group-hover:scale-110 transition-transform" />
               <span>Source</span>
             </a>
+            <UpdatedBadge />
           </div>
         </div>
       </footer>
