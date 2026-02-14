@@ -27,7 +27,7 @@ function LinkList({
           <LinkCard 
             key={link.id || link.url} 
             link={link} 
-            viewMode={viewMode} 
+            view={viewMode} 
           />
         ))}
       </section>
