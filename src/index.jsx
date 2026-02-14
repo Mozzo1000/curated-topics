@@ -24,20 +24,20 @@ export default function App() {
   const searchInputRef = useRef(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const [appTheme, setAppTheme] = useState('light'); // 'light' | 'dark' | 'system'
+  const [appTheme, setAppTheme] = useState('system'); // 'light' | 'dark' | 'system'
   const [viewMode, setViewMode] = useState('grid'); // 'list' | 'grid'
 
   const PAGE_SIZE = viewMode === "grid" ? 12 : 8; // Grid looks better with multiples of 3
 
-  useEffect(() => { setAppTheme(localStorage.getItem("vault-theme")); }, []);
-  useEffect(() => { setViewMode(localStorage.getItem("vault-layout")); }, []);
+  useEffect(() => { setAppTheme(localStorage.getItem("link-theme") || "system"); }, []);
+  useEffect(() => { setViewMode(localStorage.getItem("link-layout") || "list"); }, []);
 
   useEffect(() => {
-    localStorage.setItem('vault-theme', appTheme);
+    localStorage.setItem('link-theme', appTheme);
   }, [appTheme]);
 
   useEffect(() => {
-    localStorage.setItem('vault-layout', viewMode);
+    localStorage.setItem('link-layout', viewMode);
   }, [viewMode]);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function App() {
     }
     
     // Save to localStorage so it persists on refresh
-    localStorage.setItem('vault-theme', appTheme);
+    localStorage.setItem('link-theme', appTheme);
   }, [appTheme]);
 
   // --- EFFECTS ---
