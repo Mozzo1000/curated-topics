@@ -27,7 +27,10 @@ export default function App() {
 
   const [appTheme, setAppTheme] = useState('system'); // 'light' | 'dark' | 'system'
   const [viewMode, setViewMode] = useState('grid'); // 'list' | 'grid'
-
+  const [previewEnabled, setPreviewEnabled] = useState(() => {
+    const saved = localStorage.getItem('link-preview');
+    return saved !== null ? JSON.parse(saved) : true; // Default to true
+  });
   const PAGE_SIZE = viewMode === "grid" ? 12 : 8; // Grid looks better with multiples of 3
 
   useEffect(() => { setAppTheme(localStorage.getItem("link-theme") || "system"); }, []);
@@ -40,6 +43,10 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('link-layout', viewMode);
   }, [viewMode]);
+
+  useEffect(() => {
+    localStorage.setItem('link-preview', JSON.stringify(previewEnabled));
+  }, [previewEnabled]);
 
   useEffect(() => {
     const root = window.document.documentElement; // Usually the <html> tag
@@ -180,6 +187,7 @@ export default function App() {
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
               pageSize={PAGE_SIZE}
+              previewEnabled={previewEnabled}
             />
             </>
           )}
@@ -193,6 +201,8 @@ export default function App() {
           setTheme={setAppTheme}
           viewMode={viewMode}
           onViewModeChange={setViewMode}
+          previewEnabled={previewEnabled}
+          onPreviewToggle={setPreviewEnabled}
         />
       </div>
     </ToastProvider>

@@ -1,12 +1,14 @@
 import LinkCard from './LinkCard';
 import { Globe } from "lucide-preact"
+import { LinkPreview } from './LinkPreview';
 
 function LinkList({ 
   links, 
   viewMode, 
   currentPage, 
   setCurrentPage, 
-  pageSize 
+  pageSize,
+  previewEnabled
 }) {
   const totalPages = Math.ceil(links.length / pageSize);
   
@@ -25,13 +27,23 @@ function LinkList({
         }
       `}>
         {links.length > 0 ? (
-          paginatedLinks.map((link) => (
-            <LinkCard
-              key={link.id || link.url} 
-              link={link} 
-              view={viewMode} 
-            />
-          ))
+          paginatedLinks.map((link) => {
+              const cardElement = <LinkCard key={link.id || link.url} link={link} view={viewMode} />
+              if (!previewEnabled) {
+                  return cardElement;
+                }
+
+                return (
+                  <LinkPreview 
+                    key={link.url}
+                    title={link.title}
+                    url={link.url}
+                    domain={new URL(link.url).hostname.replace('www.', '')}
+                  >
+                    {cardElement}
+                  </LinkPreview>
+                )
+          })
         ):(
           <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border py-10 text-center">
               <Globe className="mb-3 h-10 w-10 text-muted-foreground" />

@@ -7,7 +7,9 @@ export function SettingsDrawer({
   theme,
   setTheme, 
   viewMode, 
-  onViewModeChange 
+  onViewModeChange,
+  previewEnabled,
+  onPreviewToggle
 }) {
   // Close on Escape key
   useEffect(() => {
@@ -88,6 +90,37 @@ export function SettingsDrawer({
             </div>
           </div>
 
+          <hr className="border-gray-100 dark:border-zinc-700" />
+          
+          <div className="flex flex-col gap-3">
+            <label className="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-zinc-500">
+              Site Preview
+            </label>
+            <button
+              onClick={() => onPreviewToggle(!previewEnabled)}
+              className={`flex items-center justify-between w-full px-4 py-3 rounded-xl border transition-all ${
+                previewEnabled 
+                  ? 'border-black bg-black text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-black' 
+                  : 'border-gray-200 text-gray-500 dark:border-zinc-800 dark:text-zinc-400'
+              }`}
+            >
+              <span className="text-sm font-semibold">
+                {previewEnabled ? 'Enabled' : 'Disabled'}
+              </span>
+              <div className={`w-8 h-4 rounded-full relative transition-colors ${
+                previewEnabled ? 'bg-white/20 dark:bg-black/20' : 'bg-gray-200 dark:bg-zinc-800'
+              }`}>
+                <div className={`absolute top-1 w-2 h-2 rounded-full transition-all ${
+                  previewEnabled 
+                    ? 'right-1 bg-white dark:bg-black' 
+                    : 'left-1 bg-gray-400 dark:bg-zinc-600'
+                }`} />
+              </div>
+            </button>
+            <p className="text-sm text-zinc-500 leading-tight">
+              Show a live peek of the website when hovering over cards.
+            </p>
+          </div>
         </div>
       </div>
     </div>
