@@ -36,7 +36,7 @@ export function SettingsDrawer({
             <X size={20} className="text-gray-500" />
           </button>
         </div>
-        <p className="text-sm text-gray-500 dark:text-zinc-500 mb-8">
+        <p className="text-sm text-gray-500 dark:text-zinc-400 mb-8">
           Customize your viewing experience
         </p>
 
@@ -44,7 +44,7 @@ export function SettingsDrawer({
           
           {/* Theme Selection */}
           <div className="flex flex-col gap-3">
-            <label className="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-zinc-600">Theme</label>
+            <label className="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-zinc-500">Theme</label>
             <div className="grid grid-cols-3 gap-2">
               <ThemeButton 
                 active={theme === 'light'} 
@@ -67,11 +67,11 @@ export function SettingsDrawer({
             </div>
           </div>
 
-          <hr className="border-gray-100 dark:border-zinc-900" />
+          <hr className="border-gray-100 dark:border-zinc-700" />
 
           {/* Layout Selection */}
           <div className="flex flex-col gap-3">
-            <label className="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-zinc-600">Layout</label>
+            <label className="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-zinc-500">Layout</label>
             <div className="grid grid-cols-2 gap-2">
               <LayoutButton 
                 active={viewMode === 'list'} 
@@ -101,8 +101,8 @@ function ThemeButton({ active, onClick, icon, label }) {
       onClick={onClick}
       className={`flex flex-col items-center gap-2 rounded-xl border py-3 transition-all ${
         active 
-          ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black' 
-          : 'border-gray-200 text-gray-500 hover:border-gray-400 dark:border-zinc-800 dark:hover:border-zinc-600'
+          ? 'border-black bg-black text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-black' 
+          : 'border-gray-200 text-gray-500 hover:border-gray-400 dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:text-zinc-200'
       }`}
     >
       {icon}
@@ -117,8 +117,8 @@ function LayoutButton({ active, onClick, icon, label }) {
       onClick={onClick}
       className={`flex items-center justify-center gap-3 rounded-xl border py-3 transition-all ${
         active 
-          ? 'border-black bg-black text-white dark:border-white dark:bg-white dark:text-black' 
-          : 'border-gray-200 text-gray-500 hover:border-gray-400 dark:border-zinc-800 dark:hover:border-zinc-600'
+          ? 'border-black bg-black text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-black' 
+          : 'border-gray-200 text-gray-500 hover:border-gray-400 dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:text-zinc-200'
       }`}
     >
       {icon}
