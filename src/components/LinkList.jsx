@@ -16,15 +16,19 @@ function LinkList({
   // Calculate which slice of links to show
   const startIndex = (currentPage - 1) * pageSize;
   const paginatedLinks = links.slice(startIndex, startIndex + pageSize);
-
+    
   return (
     <div className="flex flex-col">
       {/* 1. The Grid/List Container */}
       <section className={`
-        grid gap-6 transition-all duration-300
+        grid ransition-all duration-300
         ${viewMode === 'grid' 
           ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' 
           : 'grid-cols-1'
+        }
+        ${viewMode === 'compact' 
+          ? 'flex flex-col border border-gray-200 dark:border-zinc-800 rounded-xl gap-2' 
+          : 'flex flex-col gap-6'
         }
       `}>
         {links.length > 0 ? (

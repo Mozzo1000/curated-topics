@@ -32,6 +32,43 @@ function LinkCard({ link, view, isFocused}) {
     }
   };
 
+  // --- COMPACT VIEW ---
+  if (view === 'compact') {
+    return (
+      <div
+        ref={cardRef}
+        className={`group flex items-center gap-4 px-4 py-2 border-b last:border-0 transition-all
+          ${isFocused 
+            ? 'bg-zinc-100 dark:bg-zinc-800/50 border-l-4 border-l-black dark:border-l-white' 
+            : 'border-gray-100 dark:border-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-900/30'}`}
+      >
+        {/* Small Favicon */}
+        <img 
+          src={`https://icons.duckduckgo.com/ip3/${domain}.ico`}
+          className="w-4 h-4 rounded-sm grayscale group-hover:grayscale-0 transition-all"
+          alt=""
+        />
+        
+        {/* Title */}
+        <span className="flex-1 truncate text-xs font-bold text-zinc-800 dark:text-zinc-200">
+          <a href={link.url} target="_blank" rel="noopener" className="flex-1 no-underline group/title">
+            {link.title}
+          </a>
+        </span>
+
+        {/* Domain - Subtle */}
+        <span className="hidden sm:block text-[10px] font-mono text-zinc-400">
+          {new URL(link.url).hostname.replace('www.', '')}
+        </span>
+
+        {/* Date */}
+        <span className="text-[10px] text-zinc-400 tabular-nums">
+          {new Date(link.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+        </span>
+      </div>
+    );
+  }
+
   return (
     <div
       ref={cardRef}

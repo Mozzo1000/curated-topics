@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Settings, Sun, Moon, Monitor, LayoutGrid, LayoutList, X } from 'lucide-preact';
+import { useEffect } from 'preact/hooks';
+import { Sun, Moon, Monitor, LayoutGrid, LayoutList, X, Rows4 } from 'lucide-preact';
 
 export function SettingsDrawer({ 
   isOpen, 
@@ -86,6 +86,12 @@ export function SettingsDrawer({
                 onClick={() => onViewModeChange('grid')} 
                 icon={<LayoutGrid size={18} />} 
                 label="Grid" 
+              />
+              <LayoutButton 
+                active={viewMode === 'compact'} 
+                onClick={() => onViewModeChange('compact')} 
+                icon={<Rows4 size={18} />} 
+                label="Compact" 
               />
             </div>
           </div>
