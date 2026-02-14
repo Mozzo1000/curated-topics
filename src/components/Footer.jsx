@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'preact/hooks';
-import { Keyboard } from 'lucide-preact';
+import { Keyboard, Github } from 'lucide-preact';
 import { ShortcutModal } from './ShortcutModal';
 
 function Footer() {
@@ -34,8 +34,17 @@ function Footer() {
               <Keyboard size={14} className="group-hover:scale-110 transition-transform" />
               <span>Shortcuts</span>
             </button>
+            {/* GitHub Link */}
+            <a 
+              href="https://github.com/mozzo1000/curated-topics"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-black dark:text-zinc-500 dark:hover:text-white transition-all"
+            >
+              <Github size={14} className="group-hover:scale-110 transition-transform" />
+              <span>Source</span>
+            </a>
           </div>
-
         </div>
       </footer>
 
