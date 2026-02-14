@@ -1,8 +1,10 @@
 import React from 'react';
 import { Share2 } from 'lucide-preact';
+import { useToast } from '../ToastContext';
 
 function LinkCard({ link, view }) {
   const domain = new URL(link.url).hostname.replace('www.', '');
+  const toast = useToast();
 
   const handleShare = (e) => {
     e.preventDefault(); // Prevent opening the link when clicking share
@@ -15,7 +17,7 @@ function LinkCard({ link, view }) {
     } else {
       // Fallback for browsers that don't support native share
       link.url && navigator.clipboard.writeText(link.url);
-      alert('Link copied to clipboard!');
+      toast("Link copied to clipboard");
     }
   };
 
