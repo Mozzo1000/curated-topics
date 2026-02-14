@@ -1,4 +1,5 @@
 import LinkCard from './LinkCard';
+import { Globe } from "lucide-preact"
 
 function LinkList({ 
   links, 
@@ -23,14 +24,26 @@ function LinkList({
           : 'grid-cols-1'
         }
       `}>
-        {paginatedLinks.map((link) => (
-          <LinkCard 
-            key={link.id || link.url} 
-            link={link} 
-            view={viewMode} 
-          />
-        ))}
+        {links.length > 0 ? (
+          paginatedLinks.map((link) => (
+            <LinkCard
+              key={link.id || link.url} 
+              link={link} 
+              view={viewMode} 
+            />
+          ))
+        ):(
+          <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border py-10 text-center">
+              <Globe className="mb-3 h-10 w-10 text-muted-foreground" />
+              <p className="text-base font-medium text-foreground">No links found</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Try adjusting your search or filters.
+              </p>
+            </div>
+        )}
       </section>
+
+
 
       {/* 2. Pagination Controls */}
       {totalPages > 1 && (
