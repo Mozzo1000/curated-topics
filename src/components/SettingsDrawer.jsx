@@ -24,12 +24,12 @@ export function SettingsDrawer({
     <div className="fixed inset-0 z-50 flex justify-end">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity" 
+        className="hidden sm:block absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity" 
         onClick={onClose} 
       />
 
       {/* Sheet Content */}
-      <div className="relative w-80 h-full bg-white dark:bg-zinc-950 border-l border-gray-200 dark:border-zinc-800 p-6 shadow-2xl animate-in slide-in-from-right duration-300">
+      <div className="relative w-full sm:w-80 h-full bg-white dark:bg-zinc-950 border-l border-gray-200 dark:border-zinc-800 p-6 shadow-2xl animate-in slide-in-from-right duration-300">
         
         {/* Header */}
         <div className="flex items-center justify-between mb-2">
