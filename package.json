@@ -3,11 +3,14 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "vite build",
+		"gen-feed": "node scripts/generate-feed.js",
+		"build": "npm run gen-feed && vite build",
 		"preview": "vite preview"
 	},
 	"dependencies": {
 		"@tailwindcss/vite": "^4.1.18",
+		"feed": "^5.2.0",
+		"glob": "^13.0.3",
 		"lucide-preact": "^0.564.0",
 		"preact": "^10.26.9",
 		"preact-iso": "^2.11.1",
