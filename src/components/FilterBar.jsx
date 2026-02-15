@@ -142,8 +142,8 @@ function FilterBar({
 							onChange={(e) => setSortOrder(e.target.value)}
 							className={selectClasses}
 						>
-							<option value="desc">Newest</option>
-							<option value="asc">Oldest</option>
+							<option value="desc">Newest First</option>
+							<option value="asc">Oldest First</option>
 						</select>
 						<div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
 							<ChevronDown size={14} />
