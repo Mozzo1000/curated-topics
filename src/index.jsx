@@ -16,7 +16,7 @@ const collectionFiles = import.meta.glob('/src/content/collections/*.json');
 export default function App() {
   // --- STATE ---
   const [collections, setCollections] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState('desc');
   const [searchQuery, setSearchQuery] = useState('');
