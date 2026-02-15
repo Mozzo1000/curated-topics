@@ -156,12 +156,13 @@ function FilterBar({
 			{isMobileMenuOpen && (
 				<div className="fixed inset-0 z-[100] bg-white dark:bg-zinc-950 flex flex-col sm:hidden">
 					<div className="flex items-center justify-between p-6 border-b border-zinc-100 dark:border-zinc-900">
-						<h2 className="text-xl font-black">Filters</h2>
+						<h2 className="text-lg font-semibold text-gray-900 dark:text-zinc-100">Filters</h2>
+
 						<button
 							onClick={() => setIsMobileMenuOpen(false)}
-							className="p-2 bg-zinc-100 dark:bg-zinc-900 rounded-full"
+							className="p-2 -mr-2 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
 						>
-							<X size={20} />
+							<X size={20} className="text-gray-500"/>
 						</button>
 					</div>
 
