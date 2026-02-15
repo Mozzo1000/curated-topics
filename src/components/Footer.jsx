@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'preact/hooks';
-import { Keyboard, Github } from 'lucide-preact';
+import { Keyboard, Github, Rss } from 'lucide-preact';
 import { ShortcutModal } from './ShortcutModal';
 import { UpdatedBadge } from './UpdatedBadge';
 
@@ -28,13 +28,23 @@ function Footer() {
 
           {/* Links/Actions Section */}
           <div className="flex items-center gap-6">
+            
             <button 
               onClick={() => setIsShortcutModalOpen(true)}
-              className="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-black dark:text-zinc-500 dark:hover:text-white transition-all"
+              className="hidden sm:flex group items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-black dark:text-zinc-500 dark:hover:text-white transition-all"
             >
               <Keyboard size={14} className="group-hover:scale-110 transition-transform" />
               <span>Shortcuts</span>
             </button>
+            <a 
+              href="/rss.xml" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-orange-600 dark:text-zinc-500 dark:hover:text-orange-400 transition-all"
+            >
+              <Rss size={14} className="group-hover:scale-110 transition-transform" />
+              <span>RSS Feed</span>
+            </a>
             {/* GitHub Link */}
             <a 
               href="https://github.com/mozzo1000/curated-topics"
