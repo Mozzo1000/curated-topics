@@ -1,0 +1,19 @@
+{
+  "title": "Books",
+  "links": [
+    {
+      "url": "https://booksearch.blogspot.com/2010/08/books-of-world-stand-up-and-be-counted.html",
+      "title": "Books of the world, stand up and be counted! All 129,864,880 of you.",
+      "description": "Posted by Leonid Taycher, software engineer When you are part of a company that is trying to digitize all the books in the world, the first…",
+      "image": "https://booksearch.blogspot.com/favicon.ico",
+      "date": "2026-02-20"
+    },
+    {
+      "url": "https://rygoldstein.com/posts/perils-of-isbn",
+      "title": "The Perils of ISBN",
+      "description": "Last year I got into using Letterboxd, to complement my goal of watching more (good) movies. It’s got a really clean interface, the social features are useful but unobtrusive, and it makes remembering what I’ve watched and when I watched it easy. So why isn’t there a Letterboxd for books?",
+      "image": "https://rygoldstein.com/goodreads.png",
+      "date": "2026-02-20"
+    }
+  ]
+}
