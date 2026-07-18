@@ -38,21 +38,12 @@ This repository powers [links.rewake.org](https://links.rewake.org), a personal,
     </li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 
 ## About The Project
 
 The project is designed to be a fast, searchable, and organized place for everything from deep-dive articles and developer tools to fascinating media.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Built With
-
-* [![Preact][Preact]][Preact-url]
-* [![Vite][Vite]][Vite-url]
-* [![TailwindCSS][TailwindCSS]][TailwindCSS-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -134,21 +125,5 @@ Contributions to the **codebase** are highly encouraged! Please feel free to ope
 This project is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for the full license text.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Contact
-
-Andreas Backström - [andreasbackstrom.se](https://andreasbackstrom.se) &middot; [@Mozzo1000](https://github.com/Mozzo1000)
-
-Project Link: [https://github.com/Mozzo1000/curated-topics](https://github.com/Mozzo1000/curated-topics)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-[Preact]: https://img.shields.io/badge/Preact-673AB8?style=for-the-badge&logo=preact&logoColor=white
-[Preact-url]: https://preactjs.com/
-[Vite]: https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white
-[Vite-url]: https://vitejs.dev/
-[TailwindCSS]: https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white
-[TailwindCSS-url]: https://tailwindcss.com/
 </content>
 </invoke>
