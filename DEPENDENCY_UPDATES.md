@@ -49,13 +49,15 @@ CI runs on Ubuntu, and Playwright's screenshot baselines are OS-specific (the co
 
 Run `npm run test:e2e:win` before pushing anything that could affect layout, styling, or a dependency that touches rendering (Tailwind, Preact, Vite) — that's the only local command that mirrors CI exactly. `npm run test:e2e:smoke` is enough for everything else.
 
-To regenerate visual baselines correctly (i.e. as Linux screenshots, matching what CI compares against), do it inside the same container rather than natively on Windows:
+To regenerate visual baselines correctly (i.e. as Linux screenshots, matching what CI compares against), do it inside the same container rather than natively on Windows. `test:e2e:win` forwards any extra arguments straight to `playwright test` inside the container, so:
 
 ```powershell
-docker run --rm -v "${PWD}:/work" -w /work -v "/work/node_modules" mcr.microsoft.com/playwright:v1.61.1-noble bash -lc "npm ci && npm run build && (npx vite preview --port 4173 --host 127.0.0.1 &) && sleep 5 && npx playwright test --update-snapshots"
+npm run test:e2e:win -- --update-snapshots
 ```
 
-(Bump the image tag to match the installed `@playwright/test` version if it's been updated.) Then, as always, look at the changed PNGs before committing them.
+Then, as always, look at the changed PNGs before committing them. Only the files that actually exceed `maxDiffPixelRatio` get rewritten — a full run typically leaves most snapshots untouched.
+
+Note: running `npm ci` inside the container can rewrite `package-lock.json` (e.g. dropping/adding `libc` fields) if the container's bundled npm version differs from the one you last ran `npm install` with locally. That's lockfile churn from the tool version, not a real dependency change — `git checkout -- package-lock.json` before committing if you see it and didn't intend to touch dependencies.
 
 ## Handling a major-version Dependabot PR
 
