@@ -3,6 +3,7 @@ A minimal, high-performance link collection. This repository powers [links.rewak
 
 The project is designed to be a fast, searchable, and organized place for everything from deep-dive articles and developer tools to fascinating media.
 
+[![part of: re:wake](https://rewake.org/assets/badge.svg)](https://rewake.org)
 ---
 
 ## ✨ Features
