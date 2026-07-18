@@ -78,3 +78,23 @@ Open the failed Actions run and check, in this order:
 1. **The `npm run build` step** — if this fails, it's almost always a real breaking change (removed API, changed plugin config shape, etc.), not a test issue.
 2. **Playwright test failures** (not screenshot diffs) — a functional regression; read the assertion that failed.
 3. **Playwright screenshot diffs** — download the `playwright-report` artifact from the run and open it; it shows expected/actual/diff images side by side.
+
+## When a dependency update needs an accompanying code change
+
+Sometimes CI goes red not because of a real bug, but because the new dependency version needs a matching change elsewhere in the repo (a config option renamed, a plugin API changed, a component's default behavior shifted). When that happens, **push the fix directly onto the Dependabot PR's branch** rather than opening a separate PR.
+
+Why: it keeps the version bump and its compensating code change atomic. If this update is ever reverted or rolled back, the fix goes with it. It also means CI validates the bump and the fix together — which is the actual combination you're merging — instead of validating them in isolation.
+
+How:
+
+```bash
+gh pr checkout <PR-number>          # check out the Dependabot branch locally
+# make the code change needed to accommodate the new version
+git commit -am "Adjust for <package> vX breaking change"
+git push                            # pushes back onto the same Dependabot branch
+```
+
+Notes:
+- Dependabot won't overwrite your commit — if it later needs to update the branch (e.g. rebasing on a newer patch release), that's additive, not destructive. Still, re-check CI after any further Dependabot activity on the branch.
+- Only reach for a separate PR if the code change is substantial or risky enough to warrant independent review before the bump lands. For the typical "adjust for a breaking API change" fix, bundle it into the same PR.
+- Once pushed, this PR no longer qualifies for auto-merge if it was previously a patch/minor bump that failed for an unrelated reason — but major bumps were already headed for manual review anyway (see [Handling a major-version Dependabot PR](#handling-a-major-version-dependabot-pr)).
