@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'preact/hooks';
-import { Keyboard, Github, Rss } from 'lucide-preact';
+import { Keyboard, Rss } from 'lucide-preact';
 import { ShortcutModal } from './ShortcutModal';
 import { UpdatedBadge } from './UpdatedBadge';
+import { GithubIcon } from "./GithubIcon";
 
 function Footer() {
   const [isShortcutModalOpen, setIsShortcutModalOpen] = useState(false);
@@ -52,7 +53,7 @@ function Footer() {
               rel="noopener noreferrer"
               className="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-black dark:text-zinc-500 dark:hover:text-white transition-all"
             >
-              <Github size={14} className="group-hover:scale-110 transition-transform" />
+              <GithubIcon size={14} className="group-hover:scale-110 transition-transform" />
               <span>Source</span>
             </a>
             <UpdatedBadge />
