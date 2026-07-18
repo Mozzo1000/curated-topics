@@ -26,6 +26,6 @@
 	"devDependencies": {
 		"@playwright/test": "^1.61.1",
 		"@preact/preset-vite": "^2.10.5",
-		"vite": "^7.0.4"
+		"vite": "^8.1.5"
 	}
 }
