@@ -16,7 +16,7 @@
 	"dependencies": {
 		"@tailwindcss/vite": "^4.3.3",
 		"feed": "^6.0.0",
-		"glob": "^13.0.6",
+		"glob": "^14.0.3",
 		"lucide-preact": "^1.63.0",
 		"preact": "^10.29.8",
 		"preact-iso": "^2.12.2",
